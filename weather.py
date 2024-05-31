@@ -1,11 +1,21 @@
 import requests
 
+cities = ["London", "svo", "Cherepovets"]
+def get_weather(city):
+    url = f"https://wttr.in/~{city}"
+    try:
+        response = requests.get(url)
+        return response
+    except requests.exceptions.HTTPError:
+        return "Ошибка выполнения запроса"
+    
 
-def weather(city):
-    response = requests.get(f"https://wttr.in/~{city}")
-    return response.text 
+
+def main():
+    for city in cities:
+        print(get_weather(city).text)
+        print(get_weather(city).raise_for_status)
 
 
 if __name__ == "__main__":
-    city = input("Enter city: ")
-    print(weather(city))
+    main()
